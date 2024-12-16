@@ -76,7 +76,6 @@ pub struct ViewTickets<'info> {
     pub tickets: Account<'info, TicketList>,
 }
 
-// Data structures for new functionalities
 #[account]
 pub struct Ticket {
     pub user: Pubkey,

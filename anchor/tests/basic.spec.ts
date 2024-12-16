@@ -37,6 +37,16 @@ describe('basic', () => {
     const routeId = new anchor.BN(1);
     const newDetails = "Updated route details";
 
+    // Initialize the route first
+    await program.methods.addRoute(routeId, "Initial route details")
+      .accounts({
+        route: route.publicKey,
+        admin: admin,
+        systemProgram: SystemProgram.programId,
+      })
+      .signers([route])
+      .rpc();
+
     const tx = await program.methods.modifyRoute(routeId, newDetails)
       .accounts({
         route: route.publicKey,
