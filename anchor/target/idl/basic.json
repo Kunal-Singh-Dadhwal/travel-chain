@@ -1,5 +1,5 @@
 {
-  "address": "6z68wfurCMYkZG51s1Et9BJEd9nJGUusjHXNt4dGbNNF",
+  "address": "E4i1Laj8H5ZgcoynwLs3W8NCpg1uDJ2iCQYAbkCNTk6T",
   "metadata": {
     "name": "basic",
     "version": "0.1.0",
@@ -7,6 +7,112 @@
     "description": "Created with Anchor"
   },
   "instructions": [
+    {
+      "name": "add_route",
+      "discriminator": [
+        183,
+        27,
+        10,
+        225,
+        90,
+        113,
+        228,
+        7
+      ],
+      "accounts": [
+        {
+          "name": "route",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "route_id",
+          "type": "u64"
+        },
+        {
+          "name": "details",
+          "type": "string"
+        },
+        {
+          "name": "distance",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "book_ticket",
+      "discriminator": [
+        191,
+        17,
+        87,
+        4,
+        177,
+        83,
+        123,
+        211
+      ],
+      "accounts": [
+        {
+          "name": "ticket",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "user",
+          "type": "pubkey"
+        },
+        {
+          "name": "route_id",
+          "type": "u64"
+        },
+        {
+          "name": "price",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "get_current_timestamp",
+      "discriminator": [
+        186,
+        183,
+        125,
+        74,
+        145,
+        141,
+        120,
+        16
+      ],
+      "accounts": [
+        {
+          "name": "data",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
     {
       "name": "greet",
       "discriminator": [
@@ -21,6 +127,169 @@
       ],
       "accounts": [],
       "args": []
+    },
+    {
+      "name": "modify_route",
+      "discriminator": [
+        68,
+        150,
+        186,
+        52,
+        254,
+        33,
+        234,
+        196
+      ],
+      "accounts": [
+        {
+          "name": "route",
+          "writable": true
+        },
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "new_details",
+          "type": "string"
+        },
+        {
+          "name": "new_distance",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "view_tickets",
+      "discriminator": [
+        89,
+        253,
+        178,
+        78,
+        52,
+        181,
+        104,
+        89
+      ],
+      "accounts": [
+        {
+          "name": "tickets",
+          "writable": true
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Route",
+      "discriminator": [
+        80,
+        179,
+        58,
+        115,
+        52,
+        19,
+        146,
+        134
+      ]
+    },
+    {
+      "name": "Ticket",
+      "discriminator": [
+        41,
+        228,
+        24,
+        165,
+        78,
+        90,
+        235,
+        200
+      ]
+    },
+    {
+      "name": "TicketList",
+      "discriminator": [
+        199,
+        68,
+        200,
+        187,
+        58,
+        64,
+        242,
+        212
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "Route",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "distance",
+            "type": "u64"
+          },
+          {
+            "name": "route_id",
+            "type": "u64"
+          },
+          {
+            "name": "details",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ticket",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "u64"
+          },
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "route_id",
+            "type": "u64"
+          },
+          {
+            "name": "price",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TicketList",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "tickets",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "Ticket"
+                }
+              }
+            }
+          }
+        ]
+      }
     }
   ]
 }
